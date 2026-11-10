@@ -1,0 +1,1100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title>Growth Audit — Pregmate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: only light;
+  /* ---- Pregmate, extracted from their live screens ---- */
+  --pm-bg:#FFFFFF; --pm-wash:#F9EEF6; --pm-card:#F2F2F4; --pm-line:#E6E6EA;
+  --pm-pri:#CA3B89; --pm-pri-dk:#B82969; --pm-sel:#F3E1F0;
+  --pm-violet:#5B4FD6; --pm-teal:#2B97A4; --pm-teal-bg:#DDF3F4; --pm-star:#E8963A;
+  --pm-ink:#1B1B25; --pm-txt:#4B4B57; --pm-muted:#8E8E99;
+  --pm-grad:linear-gradient(90deg,#EBA066 0%,#E37672 50%,#DC4B79 100%);
+  --r-ctl:14px; --r-media:24px;
+  /* ---- the report shell, in Pregmate's own palette ---- */
+  --bg:#F9EEF6; --bg2:#FFFFFF; --surf:#FFFFFF;
+  --hair:rgba(27,27,37,.09); --hair2:rgba(27,27,37,.16);
+  --ink:#1B1B25; --ink2:#4B4B57; --ink3:#8E8E99;
+  --accent:#CA3B89; --accent-lift:#A82770;
+  --panel:#FFFFFF; --panel-ink:#15151C; --panel-muted:#666672; --panel-line:#ECECF0;
+  --accent-ink:#9E2168;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 32px}
+@media(max-width:700px){.wrap{padding:0 20px}}
+
+/* ============ top bar ============ */
+.nav{position:sticky;top:0;z-index:70;background:rgba(249,238,246,.86);backdrop-filter:blur(18px) saturate(160%);
+  border-bottom:1px solid var(--hair)}
+.nav-in{max-width:1080px;margin:0 auto;padding:0 32px;height:58px;display:flex;align-items:center;gap:18px}
+@media(max-width:700px){.nav-in{padding:0 20px;gap:12px}}
+.nav-brand{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;letter-spacing:-.01em}
+.nav-brand .mk{width:28px;height:28px;flex:none;display:grid;place-items:center;background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(27,27,37,.12)}
+.nav-brand .mk svg{width:17px;height:17px;display:block}
+.nav-brand span.co{color:var(--ink2);font-weight:500}
+.nav-brand b{color:var(--ink);font-weight:600}
+.nav-links{margin-left:auto;display:flex;gap:2px;align-items:center}
+.nav-links button{padding:7px 14px;border-radius:8px;font-size:13px;font-weight:600;color:var(--ink3);transition:.16s}
+.nav-links button:hover{color:var(--ink)}
+.nav-links button.on{color:var(--ink);background:#fff;box-shadow:0 1px 4px rgba(27,27,37,.08)}
+@media(max-width:640px){.nav-brand span.co{display:none}}
+
+.view{display:none}
+.view.on{display:block}
+
+/* ============ hero ============ */
+.hero{padding:104px 0 0;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-340px;left:50%;transform:translateX(-50%);
+  width:1100px;height:640px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(202,59,137,.18),transparent 72%)}
+.hero::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(40% 50% at 8% 20%,rgba(235,160,102,.20),transparent 70%),
+   radial-gradient(38% 45% at 92% 18%,rgba(91,79,214,.13),transparent 70%)}
+.hero>*{position:relative;z-index:1}
+.eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lift);margin-bottom:26px}
+.hero h1{font-size:76px;line-height:.98;font-weight:700;letter-spacing:-.045em;margin:0 0 24px}
+@media(max-width:820px){.hero h1{font-size:50px}.hero{padding-top:70px}}
+.hero .lede{font-size:20px;line-height:1.5;font-weight:400;color:var(--ink2);max-width:600px;margin:0 auto;letter-spacing:-.012em}
+@media(max-width:820px){.hero .lede{font-size:17px}}
+.hero .meta{margin-top:30px;font-size:12.5px;color:var(--ink3);letter-spacing:.02em}
+.hero .meta b{color:var(--ink2);font-weight:600}
+
+.stats{display:flex;justify-content:center;gap:0;margin:70px auto 0;max-width:760px;
+  border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.stat{flex:1;padding:26px 14px;text-align:center;border-left:1px solid var(--hair)}
+.stat:first-child{border-left:none}
+.stat b{display:block;font-size:26px;font-weight:700;letter-spacing:-.03em;color:var(--ink)}
+.stat span{display:block;font-size:11.5px;color:var(--ink3);margin-top:5px;line-height:1.35}
+@media(max-width:700px){.stat b{font-size:19px}.stat{padding:18px 8px}}
+
+.fb{max-width:760px;margin:0 auto;padding:30px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:26px;text-align:left}
+@media(max-width:700px){.fb{grid-template-columns:1fr;gap:20px;padding-top:24px}}
+.fb-k{grid-column:1/-1;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink3);text-align:center;margin-bottom:-6px}
+.fb-i{display:flex;gap:12px;align-items:flex-start}
+.fb-i .tick{width:18px;height:18px;flex:none;margin-top:3px;border-radius:50%;background:rgba(202,59,137,.16);
+  display:grid;place-items:center}
+.fb-i .tick svg{width:10px;height:10px;stroke:var(--accent-lift);stroke-width:3;fill:none;
+  stroke-linecap:round;stroke-linejoin:round}
+.fb-i p{font-size:14px;line-height:1.55;color:var(--ink2);margin:0}
+.fb-i p b{color:var(--ink);font-weight:700}
+
+.sec{padding:96px 0}
+.sec-k{font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);margin-bottom:18px}
+.sec h2{font-size:38px;line-height:1.14;font-weight:700;letter-spacing:-.035em;margin:0 0 20px;max-width:680px}
+@media(max-width:820px){.sec h2{font-size:29px}.sec{padding:64px 0}}
+.sec p.body{font-size:17px;line-height:1.66;color:var(--ink2);max-width:640px;margin:0 0 18px;letter-spacing:-.008em}
+.sec p.body b{color:var(--ink);font-weight:600}
+.rule{height:1px;background:var(--hair);margin:0}
+
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px;max-width:820px}
+@media(max-width:760px){.notes{grid-template-columns:1fr}}
+.note{background:var(--surf);border:1px solid var(--hair);box-shadow:0 2px 10px rgba(27,27,37,.04);border-radius:16px;padding:24px 26px}
+.note h4{font-size:15px;font-weight:700;letter-spacing:-.015em;margin:0 0 8px}
+.note p{font-size:14px;line-height:1.6;color:var(--ink2);margin:0}
+
+.ideas{display:flex;flex-direction:column;gap:0;margin-top:14px;border-top:1px solid var(--hair)}
+.idea{display:grid;grid-template-columns:52px 1fr 180px;gap:26px;align-items:start;
+  padding:30px 4px;border-bottom:1px solid var(--hair);text-align:left;width:100%;transition:.18s}
+.idea:hover{background:rgba(255,255,255,.7)}
+@media(max-width:780px){.idea{grid-template-columns:38px 1fr;gap:16px}}
+.idea .no{font-size:13px;font-weight:700;color:var(--ink3);padding-top:4px;letter-spacing:.02em}
+.idea h3{font-size:21px;line-height:1.25;font-weight:700;letter-spacing:-.024em;margin:0 0 7px}
+@media(max-width:820px){.idea h3{font-size:18px}}
+.idea p{font-size:14.5px;line-height:1.6;color:var(--ink2);margin:0;max-width:540px}
+.idea .out{text-align:right;padding-top:3px}
+@media(max-width:780px){.idea .out{grid-column:2;text-align:left;padding-top:12px}}
+.idea .out b{display:block;font-size:19px;font-weight:700;letter-spacing:-.025em;color:var(--accent-lift);white-space:nowrap}
+.idea .out span{display:block;font-size:10.5px;color:var(--ink3);margin-top:3px;letter-spacing:.04em;text-transform:uppercase;font-weight:600}
+.idea .seeit{display:inline-flex;align-items:center;gap:5px;margin-top:11px;font-size:12.5px;
+  font-weight:600;color:var(--accent-lift)}
+.idea .seeit svg{width:12px;height:12px}
+
+.band{background:var(--surf);border:1px solid var(--hair);border-radius:28px;box-shadow:0 2px 10px rgba(27,27,37,.04);padding:40px 44px;margin-top:44px;
+  display:flex;align-items:center;gap:36px;flex-wrap:wrap}
+@media(max-width:700px){.band{padding:28px 24px;gap:22px}}
+.band .lab{font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.band .txt{flex:1;min-width:240px}
+.band .txt p{font-size:15.5px;line-height:1.6;color:var(--ink2);margin:0}
+.band .nums{display:flex;gap:34px}
+.band .nums div b{display:block;font-size:30px;font-weight:700;letter-spacing:-.035em;color:var(--accent-lift)}
+.band .nums div span{display:block;font-size:11px;color:var(--ink3);margin-top:2px;letter-spacing:.04em;
+  text-transform:uppercase;font-weight:600}
+
+.cta-row{display:flex;justify-content:center;align-items:center;gap:22px;flex-wrap:wrap;margin-top:52px}
+.bigbtn{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:#fff;
+  font-size:15px;font-weight:700;letter-spacing:-.01em;padding:15px 26px;border-radius:30px;transition:.16s}
+.bigbtn:hover{filter:brightness(1.08)}
+.bigbtn svg{width:15px;height:15px}
+.foot{border-top:1px solid var(--hair);padding:36px 0 70px;font-size:12.5px;line-height:1.6;color:var(--ink3)}
+.herobtns{display:flex;justify-content:center;margin-top:30px}
+.ghostbtn{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--hair2);color:var(--ink);font-size:14px;
+  font-weight:700;padding:9px 20px 9px 9px;border-radius:30px;box-shadow:0 2px 12px rgba(27,27,37,.06);transition:.16s}
+.ghostbtn:hover{box-shadow:0 4px 18px rgba(27,27,37,.1)}
+.ghostbtn .pl{width:30px;height:30px;border-radius:50%;background:var(--accent);display:grid;place-items:center}
+.ghostbtn .pl svg{width:12px;height:12px;fill:#fff;margin-left:2px}
+
+/* ============ prototype stage ============ */
+.stage{display:grid;grid-template-columns:minmax(440px,1fr) minmax(400px,470px);gap:0;
+  align-items:start;min-height:calc(100vh - 58px)}
+@media(max-width:1080px){.stage{grid-template-columns:1fr}}
+.phonecol{padding:34px 24px 46px;display:flex;flex-direction:column;align-items:center;gap:18px}
+.panelcol{border-left:1px solid var(--hair);background:var(--panel);color:var(--panel-ink);
+  min-height:calc(100vh - 58px);position:sticky;top:58px;max-height:calc(100vh - 58px);overflow-y:auto}
+@media(max-width:1080px){.panelcol{position:static;max-height:none;border-left:none;border-top:1px solid var(--hair)}}
+
+.phone{position:relative;width:390px;height:844px;flex:none;background:#000;border:11px solid #000;
+  border-radius:46px;box-shadow:0 0 0 1.5px #E3CFDD,0 34px 70px -22px rgba(90,30,70,.35)}
+.phone-in{position:absolute;inset:0;border-radius:36px;overflow:hidden;background:var(--pm-bg);color-scheme:only light}
+.island{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:104px;height:30px;background:#000;
+  border-radius:16px;z-index:60;pointer-events:none}
+.sbar{position:absolute;top:0;left:0;right:0;height:50px;z-index:55;pointer-events:none;display:flex;
+  align-items:center;justify-content:space-between;padding:14px 28px 0 34px;font:700 15px/1 'Inter',sans-serif;color:#111;transition:color .3s}
+.sbar.light{color:#fff}
+.sbar .glyphs{display:flex;gap:5px;align-items:center}
+.homebar{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);width:134px;height:5px;
+  border-radius:3px;background:#111;z-index:56;pointer-events:none;transition:background .3s}
+.homebar.light{background:rgba(255,255,255,.9)}
+.screenwrap{position:absolute;inset:0;overflow:hidden;background:var(--pm-bg)}
+
+/* ============ phone screens — Pregmate's system, all prefixed scr-/pm- ============ */
+.scr{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--pm-bg);color:var(--pm-ink);
+  font-family:'Inter',-apple-system,sans-serif;
+  transform:translateX(100%);transition:transform .36s cubic-bezier(.32,.72,0,1);z-index:10;will-change:transform}
+.scr.is-active{transform:translateX(0);z-index:20}
+.scr.is-past{transform:translateX(-24%)}
+.scr.sheet{transform:translateY(100%)}
+.scr.sheet.is-active{transform:translateY(0);z-index:30}
+.scr.nofx{transition:none}
+.scr--wash{background:var(--pm-wash)}
+.scr-top{flex:none;padding:56px 24px 0;position:relative;z-index:2}
+.scr-body{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:0 24px;scrollbar-width:none;position:relative;z-index:2}
+.scr-body::-webkit-scrollbar{display:none}
+.scr-body.dock{display:flex;flex-direction:column;justify-content:center}
+.scr-foot{flex:none;padding:12px 24px 34px;position:relative;z-index:2}
+
+.pm-nav{display:flex;align-items:center;justify-content:space-between;height:36px}
+.pm-back{width:36px;height:36px;margin-left:-8px;display:grid;place-items:center;color:var(--pm-ink)}
+.pm-back svg{width:22px;height:22px}
+.pm-skip{font-size:15px;font-weight:500;color:var(--pm-muted);padding:6px 0 6px 10px}
+.pm-h{font-size:27px;line-height:1.18;font-weight:700;letter-spacing:-.022em;margin:14px 0 0;text-align:center;color:var(--pm-ink)}
+.pm-h em{font-style:normal;color:var(--pm-violet)}
+.pm-sub{font-size:16px;line-height:1.35;color:var(--pm-ink);margin:8px 0 0;text-align:center;font-weight:400}
+.pm-kick{font-size:17px;font-weight:600;color:var(--pm-violet);text-align:center;letter-spacing:-.01em}
+.pm-btn{display:block;width:100%;height:54px;border-radius:var(--r-ctl);background:var(--pm-pri);color:#fff;
+  font:500 17px/1 'Inter',sans-serif;letter-spacing:-.005em;transition:filter .15s,opacity .2s}
+.pm-btn:hover{filter:brightness(1.05)}
+.pm-btn[disabled]{opacity:.45;cursor:default}
+.pm-btn.grad{background:var(--pm-grad)}
+.pm-helper{font-size:13px;line-height:1.4;color:var(--pm-muted);text-align:center;margin:10px 0 0;font-weight:500}
+
+/* welcome */
+.pm-wimg{display:block;width:300px;height:auto;margin:0 auto 22px;border-radius:var(--r-media)}
+.pm-wh{font-size:31px;line-height:1.14;font-weight:700;letter-spacing:-.025em;text-align:center;margin:8px 0 0;color:var(--pm-ink)}
+
+/* option cards */
+.pm-opts{display:flex;flex-direction:column;gap:10px;margin-top:26px}
+.pm-opt{width:100%;min-height:76px;padding:12px 40px;border-radius:var(--r-ctl);background:var(--pm-card);
+  font:600 17px/1.25 'Inter',sans-serif;color:var(--pm-ink);text-align:center;transition:.16s}
+.pm-opt.on{background:var(--pm-pri);color:#fff}
+
+/* calendar */
+.pm-wk{display:grid;grid-template-columns:repeat(7,1fr);margin:18px -8px 0;padding-bottom:12px;border-bottom:1px solid var(--pm-line)}
+.pm-wk span{text-align:center;font-size:15px;color:var(--pm-txt)}
+.pm-mon{font-size:16px;font-weight:700;margin:22px 0 6px;color:var(--pm-ink)}
+.pm-days{display:grid;grid-template-columns:repeat(7,1fr);margin:0 -8px;row-gap:8px}
+.pm-day{position:relative;height:46px;display:grid;place-items:center;font:500 17px/1 'Inter',sans-serif;color:var(--pm-ink)}
+.pm-day i{font-style:normal;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;transition:.14s}
+.pm-day.on i{background:var(--pm-pri);color:#fff;font-weight:700}
+.pm-day.dis{color:#A5A5AF;cursor:default}
+.pm-day.today::after{content:'Today';position:absolute;bottom:-9px;left:0;right:0;text-align:center;font-size:10px;font-weight:700;color:var(--pm-ink)}
+
+/* wheel */
+.pm-wheelwrap{position:relative;margin:0 -24px;height:220px}
+.pm-wheelbar{position:absolute;left:24px;right:24px;top:88px;height:44px;border-radius:10px;background:var(--pm-card);pointer-events:none}
+.pm-wheelbar span{position:absolute;left:calc(50% + 30px);top:0;line-height:46px;font-size:13px;color:var(--pm-muted)}
+.pm-wheel{position:relative;height:220px;overflow-y:scroll;scroll-snap-type:y mandatory;scrollbar-width:none;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 28%,#000 72%,transparent);
+          mask-image:linear-gradient(180deg,transparent,#000 28%,#000 72%,transparent)}
+.pm-wheel::-webkit-scrollbar{display:none}
+.pm-wheel .pm-sp{height:88px}
+.pm-wheel .pm-it{height:44px;scroll-snap-align:center;display:flex;align-items:center;justify-content:center;
+  font:700 30px/1 'Inter',sans-serif;color:var(--pm-ink);letter-spacing:-.02em;transition:transform .1s}
+
+/* loader */
+.pm-load-h{font-size:30px;line-height:1.16;font-weight:700;letter-spacing:-.025em;text-align:center;margin:44px 0 22px}
+.pm-lrow{margin-top:16px}
+.pm-lrow span{display:block;font-size:15px;color:var(--pm-ink);margin-bottom:7px}
+.pm-ltrack{position:relative;height:24px;border-radius:12px;background:#F6F1F5;box-shadow:inset 0 0 0 1px #EEE3EB;overflow:hidden}
+.pm-ltrack i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:12px;background:var(--pm-grad)}
+.pm-ltrack b{position:absolute;right:4px;top:4px;width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.35);display:grid;place-items:center;opacity:0;transition:opacity .25s}
+.pm-ltrack b svg{width:9px;height:9px;stroke:#fff;stroke-width:3.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.pm-lrow.done .pm-ltrack b{opacity:1}
+
+/* payoff */
+.pm-calcard{background:#fff;border-radius:var(--r-media);padding:14px 14px 12px;margin-top:18px}
+.pm-mini{display:grid;grid-template-columns:repeat(7,1fr);row-gap:3px}
+.pm-mini span{height:30px;display:grid;place-items:center;font-size:14px;color:var(--pm-ink)}
+.pm-mini span i{font-style:normal;width:28px;height:28px;border-radius:50%;display:grid;place-items:center}
+.pm-mini .p i{background:var(--pm-pri);color:#fff;font-weight:700}
+.pm-mini .n i{box-shadow:inset 0 0 0 1.5px var(--pm-pri);color:var(--pm-pri);font-weight:600}
+.pm-mini .f i{color:var(--pm-teal);font-weight:700}
+.pm-mini .o i{color:var(--pm-teal);font-weight:700;border:1.5px dotted var(--pm-teal)}
+.pm-mini .t i{text-decoration:underline;text-underline-offset:3px}
+.pm-mini .x{color:#B9B9C2}
+.pm-rows{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+.pm-row{display:flex;align-items:center;gap:11px;background:#fff;border-radius:var(--r-ctl);padding:12px 14px;font-size:15px;color:var(--pm-ink)}
+.pm-row .d{width:12px;height:12px;border-radius:50%;flex:none;background:var(--pm-pri)}
+.pm-row .d.teal{background:var(--pm-teal)}
+.pm-row .d.dot{background:none;border:2px dotted var(--pm-teal)}
+.pm-row .d.vio{background:var(--pm-violet)}
+.pm-row b{margin-left:auto;font-weight:700;white-space:nowrap}
+.pm-est{font-size:12.5px;line-height:1.45;color:var(--pm-muted);text-align:center;margin:12px 6px 10px}
+.pm-week{background:#fff;border-radius:var(--r-media);padding:22px;margin-top:18px;text-align:center}
+.pm-week b{display:block;font-size:44px;font-weight:700;letter-spacing:-.03em;color:var(--pm-violet);line-height:1}
+.pm-week span{display:block;font-size:14px;color:var(--pm-txt);margin-top:6px}
+
+/* paywall */
+.pm-hero{position:absolute;left:0;right:0;top:0;height:228px;z-index:1;overflow:hidden;clip-path:circle(290px at 50% -64px);background:#8E1F4B}
+.pm-hero img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
+.pm-pskip{position:absolute;right:22px;top:58px;z-index:5;font-size:15px;font-weight:500;color:rgba(255,255,255,.92);padding:6px 0 6px 12px}
+.scr--pay .scr-top{padding:182px 24px 0}
+.pm-tile{width:84px;height:84px;margin:0 auto;border-radius:22px;background:#fff;display:grid;place-items:center;
+  box-shadow:0 10px 26px -10px rgba(60,20,50,.35),0 1px 3px rgba(60,20,50,.1)}
+.pm-tile svg{width:46px;height:46px}
+.scr--pay .scr-body{padding:0 24px}
+.pm-laurel{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px}
+.pm-laurel svg.lv{width:34px;height:76px;flex:none}
+.pm-laurel div{text-align:center}
+.pm-stars{display:flex;gap:3px;justify-content:center;margin-bottom:3px}
+.pm-stars svg{width:15px;height:15px;fill:var(--pm-star)}
+.pm-laurel h3{font-size:25px;line-height:1.1;font-weight:700;letter-spacing:-.02em;color:var(--pm-pri-dk)}
+.pm-laurel p{font-size:15.5px;line-height:1.25;font-weight:700;color:var(--pm-ink);margin-top:3px}
+.pm-rate{font-size:13px;font-weight:600;color:var(--pm-txt);text-align:center;margin-top:6px}
+.pm-rate b{color:var(--pm-ink);font-weight:700}
+.pm-ppara{font-size:14.5px;line-height:1.42;color:var(--pm-txt);text-align:center;margin:10px 2px 0}
+.pm-ppara b{color:var(--pm-ink);font-weight:700}
+.pm-ppara em{font-style:normal;color:var(--pm-violet);font-weight:700}
+.pm-tog{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:left;background:var(--pm-card);
+  border-radius:var(--r-ctl);padding:9px 14px 9px 16px;margin-top:12px}
+.pm-tog b{display:block;font-size:14.5px;font-weight:600;color:var(--pm-ink)}
+.pm-tog span.s{display:block;font-size:13.5px;color:var(--pm-txt);margin-top:2px}
+.pm-sw{width:51px;height:31px;border-radius:16px;background:#DDDDE1;position:relative;flex:none;transition:background .2s}
+.pm-sw::after{content:'';position:absolute;left:2px;top:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);transition:transform .2s}
+.pm-tog.on .pm-sw{background:var(--pm-pri)}
+.pm-tog.on .pm-sw::after{transform:translateX(20px)}
+.pm-plans{display:flex;flex-direction:column;gap:9px;margin-top:10px}
+.pm-plan{position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:10px;width:100%;text-align:left;
+  background:var(--pm-bg);border:1.5px solid var(--pm-line);border-radius:var(--r-ctl);padding:11px 16px;overflow:hidden;transition:.16s}
+.pm-plan.on{background:var(--pm-sel);border-color:var(--pm-pri)}
+.pm-plan .t{display:block;font-size:16px;font-weight:700;color:var(--pm-ink)}
+.pm-plan .s{display:block;font-size:14px;font-weight:600;color:var(--pm-ink);margin-top:3px}
+.pm-plan .r{font-size:14.5px;color:var(--pm-ink);white-space:nowrap}
+.pm-plan.one{align-items:center;padding:16px}
+.pm-badge{position:absolute;top:0;right:0;background:var(--pm-pri-dk);color:#fff;font-size:12px;font-weight:700;padding:3px 9px 4px 11px;border-radius:0 0 0 10px}
+.scr--pay .scr-foot{padding:10px 24px 32px}
+
+/* offer on skip */
+.scr--offer{background:var(--pm-wash)}
+.scr--offer .pm-tile{width:68px;height:68px;border-radius:18px;margin-top:6px}
+.scr--offer .pm-tile svg{width:38px;height:38px}
+.pm-chip{display:inline-flex;align-items:center;gap:7px;background:var(--pm-teal-bg);color:var(--pm-teal);font-size:13.5px;font-weight:700;
+  padding:7px 13px;border-radius:20px;margin-top:14px}
+.pm-chip.vio{background:#E7E4FB;color:var(--pm-violet)}
+.pm-tl{background:#fff;border-radius:var(--r-media);padding:18px 18px 16px;margin-top:18px}
+.pm-tli{display:flex;gap:14px;position:relative;padding-bottom:20px}
+.pm-tli:last-child{padding-bottom:0}
+.pm-tli::before{content:'';position:absolute;left:14px;top:30px;bottom:0;width:2px;background:var(--pm-sel)}
+.pm-tli:last-child::before{display:none}
+.pm-tli .ic{width:30px;height:30px;border-radius:50%;flex:none;background:var(--pm-sel);display:grid;place-items:center}
+.pm-tli .ic svg{width:15px;height:15px;stroke:var(--pm-pri);stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.pm-tli.now .ic{background:var(--pm-pri)}
+.pm-tli.now .ic svg{stroke:#fff}
+.pm-tli b{display:block;font-size:15.5px;font-weight:700;color:var(--pm-ink)}
+.pm-tli span{display:block;font-size:14px;line-height:1.4;color:var(--pm-txt);margin-top:2px}
+.pm-oplan{font-size:14px;color:var(--pm-ink);text-align:center;margin:0 0 10px;font-weight:600}
+
+/* reminders */
+.pm-rphone{position:relative;width:190px;height:150px;margin:0 auto;border-radius:30px 30px 0 0;
+  background:linear-gradient(135deg,#B9B6EC 0%,#E79AD0 55%,#F0A9A0 100%);
+  box-shadow:inset 0 0 0 5px #fff,0 0 0 1px #E4E4EA;
+  -webkit-mask-image:linear-gradient(180deg,#000 55%,transparent);mask-image:linear-gradient(180deg,#000 55%,transparent)}
+.pm-rphone::before{content:'';position:absolute;top:16px;left:50%;transform:translateX(-50%);width:54px;height:16px;border-radius:8px;background:#fff}
+.pm-rnote{position:relative;z-index:2;display:flex;gap:10px;align-items:center;margin:-112px 6px 0;background:rgba(244,244,246,.96);border-radius:18px;padding:11px 13px;
+  box-shadow:0 8px 22px -10px rgba(0,0,0,.25)}
+.pm-rnote .ti{width:36px;height:36px;border-radius:9px;background:#fff;display:grid;place-items:center;flex:none}
+.pm-rnote .ti svg{width:20px;height:20px}
+.pm-rnote p{font-size:12.5px;line-height:1.35;color:var(--pm-ink)}
+.pm-rnote p b{font-weight:700}
+.pm-rh{font-size:31px;line-height:1.14;font-weight:700;letter-spacing:-.025em;text-align:center;margin:84px 0 0}
+.pm-rsub{font-size:16px;line-height:1.35;color:var(--pm-txt);text-align:center;margin-top:10px}
+.pm-alert{position:absolute;inset:0;z-index:40;background:rgba(0,0,0,.24);display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .2s}
+.pm-alert.on{opacity:1;pointer-events:auto}
+.pm-alert div.bx{width:300px;background:rgba(250,250,252,.97);border-radius:30px;padding:22px 20px 18px;box-shadow:0 20px 50px -10px rgba(0,0,0,.35)}
+.pm-alert h4{font-size:17px;line-height:1.25;font-weight:700;color:#111}
+.pm-alert p{font-size:14.5px;line-height:1.35;color:#555;margin-top:6px}
+.pm-alert .bt{display:flex;gap:10px;margin-top:16px}
+.pm-alert .bt button{flex:1;height:46px;border-radius:23px;background:#E4E4E8;font:600 16px/1 -apple-system,'Inter',sans-serif;color:#111}
+
+/* dark mode — an approximation: no dark frames were supplied */
+.phone-in.dark{--pm-bg:#15121A;--pm-wash:#1C1622;--pm-card:#26212D;--pm-line:#3A3342;--pm-sel:#3B1D30;--pm-ink:#F5F2F7;--pm-txt:#B9B3C0;
+  --pm-muted:#8B8493;--pm-violet:#9C92FF;--pm-teal:#5CC8D4;--pm-teal-bg:#173A40;--pm-pri-dk:#F06DB4;background:var(--pm-bg)}
+.phone-in.dark .screenwrap{background:var(--pm-bg)}
+.phone-in.dark .pm-calcard,.phone-in.dark .pm-row,.phone-in.dark .pm-week,.phone-in.dark .pm-tl{background:#26212D}
+.phone-in.dark .pm-ltrack{background:#26212D;box-shadow:inset 0 0 0 1px #3A3342}
+.phone-in.dark .pm-day.dis{color:#5F5967}
+.phone-in.dark .pm-mini .x{color:#5F5967}
+.phone-in.dark .pm-sw{background:#4A4353}
+.phone-in.dark .pm-tog.on .pm-sw{background:var(--pm-pri)}
+.phone-in.dark .pm-badge{background:#B82969}
+.phone-in.dark .pm-chip.vio{background:#2B2750}
+.phone-in.dark .pm-rnote{background:rgba(52,46,60,.97)}
+.phone-in.dark .pm-rphone{box-shadow:inset 0 0 0 5px #3A3342,0 0 0 1px #15121A}
+.phone-in.dark .pm-rphone::before{background:#3A3342}
+.phone-in.dark .pm-alert div.bx{background:rgba(44,40,50,.98)}
+.phone-in.dark .pm-alert h4{color:#fff}
+.phone-in.dark .pm-alert p{color:#B9B3C0}
+.phone-in.dark .pm-alert .bt button{background:#4A4353;color:#fff}
+.phone-in.dark .lv path{fill:#4A4353}
+
+/* prototype toolbar, walkthrough, QR */
+.tools{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:520px}
+.seg{display:inline-flex;align-items:center;background:#fff;border:1px solid #EBD9E5;border-radius:20px;padding:3px;gap:2px}
+.seg button{padding:6px 11px;border-radius:16px;font:600 12px/1 'Inter',sans-serif;color:var(--ink2);transition:.14s}
+.seg button.on{background:var(--ink);color:#fff}
+.demo-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 14px;border-radius:20px;background:var(--accent);color:#fff;
+  font:700 12px/1 'Inter',sans-serif}
+.demo-cap{width:390px;max-width:calc(100vw - 24px);background:#fff;border:1px solid var(--hair);border-radius:16px;padding:14px 14px 12px;
+  display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;box-shadow:0 4px 18px rgba(27,27,37,.07)}
+.demo-cap .bar{position:absolute;left:0;top:0;right:0;height:3px;background:#F3E9F0}
+.demo-cap .bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s linear}
+.demo-cap p{flex:1;font-size:13.5px;line-height:1.45;color:var(--ink);margin:0;font-weight:500}
+.demo-cap button{font:700 12px/1 'Inter',sans-serif;color:var(--ink2);padding:7px 10px;border-radius:12px;border:1px solid #EBD9E5;flex:none}
+.finger{position:absolute;z-index:90;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:rgba(27,27,37,.26);
+  border:2px solid rgba(255,255,255,.95);box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none;opacity:0;left:50%;top:60%;
+  transition:left .32s cubic-bezier(.4,0,.2,1),top .32s cubic-bezier(.4,0,.2,1),opacity .2s,transform .15s}
+.finger.show{opacity:1}
+.finger.press{transform:scale(.78);background:rgba(27,27,37,.4)}
+.qr{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--hair);border-radius:16px;padding:10px 16px 10px 10px;text-align:left}
+.qr img{width:123px;height:123px;display:block;image-rendering:pixelated;border-radius:6px}
+.qr span{font-size:12.5px;line-height:1.45;color:var(--ink2)}
+.qr b{display:block;color:var(--ink);font-size:13.5px}
+@media(max-width:1080px){.qr{display:none}}
+
+#view-proto .tools{order:0} #view-proto .demo-cap{order:1} #view-proto .phone{order:2} #view-proto .chips{order:3}
+#view-proto .chiphint{order:4} #view-proto .qr{order:5}
+/* on a phone: the prototype is the screen */
+@media(max-width:500px){
+  #view-proto .phonecol{padding:0 0 28px;gap:14px}
+  #view-proto .phone{width:100vw;height:calc(100svh - 58px);min-height:640px;border:0;border-radius:0;box-shadow:none;order:1}
+  #view-proto .phone-in{border-radius:0}
+  #view-proto .island,#view-proto .sbar,#view-proto .homebar{display:none}
+  #view-proto .scr-top{padding-top:16px}
+  #view-proto .scr-foot{padding-bottom:18px}
+  #view-proto .scr--pay .scr-top{padding-top:150px}
+  #view-proto .pm-hero{height:196px;clip-path:circle(290px at 50% -96px)}
+  #view-proto .pm-pskip{top:14px}
+  #view-proto .tools{order:3;padding:0 12px}
+  #view-proto .demo-cap{position:fixed;left:12px;right:12px;bottom:12px;width:auto;max-width:none;z-index:95}
+  #view-proto .chips{order:4;padding:0 12px}
+  #view-proto .chiphint{order:5}
+}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:470px;margin:0 auto}
+.chip{padding:7px 13px;border-radius:20px;border:1px solid #EBD9E5;background:#fff;
+  font:600 12px/1 'Inter',sans-serif;color:var(--ink2);transition:.14s}
+.chip:hover{color:var(--ink);border-color:#D9BFD0}
+.chip.offer{border-style:dashed;border-color:var(--accent);color:var(--accent-lift)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff;border-style:solid}
+.chiphint{text-align:center;font-size:11px;color:var(--ink3);margin:0;max-width:430px}
+
+/* ============ the short panel ============ */
+.pn{padding:30px 30px 60px}
+.pn-n{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink)}
+.pn-n.ctx{color:var(--panel-muted)}
+.pn-t{font-size:23px;line-height:1.18;font-weight:700;letter-spacing:-.028em;margin:8px 0 0;color:var(--panel-ink)}
+.pn-hyp{font-size:15px;line-height:1.62;color:#33333D;margin:16px 0 0}
+.pn-hyp b{font-weight:700;color:var(--panel-ink)}
+.pn-out{margin-top:22px;border-top:1px solid var(--panel-line);padding-top:18px}
+.pn-out .lab{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--panel-muted)}
+.pn-out .v{font-size:31px;font-weight:700;letter-spacing:-.035em;color:var(--accent-ink);margin-top:7px;line-height:1}
+.pn-kept{margin-top:22px;font-size:12.5px;line-height:1.55;color:var(--panel-muted)}
+.pn-kept b{color:#33333D;font-weight:700}
+.pn-foot{font-size:11.5px;line-height:1.55;color:var(--panel-muted);border-top:1px solid var(--panel-line);
+  padding-top:14px;margin-top:26px}
+.pn-sep{height:1px;background:var(--panel-line);margin:26px 0}
+.hidden{display:none !important}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="pmLogo" viewBox="0 0 100 100">
+      <rect x="24" y="16" width="20" height="70" rx="10" fill="#6FD0E2"/>
+      <path d="M44 26H60a19 19 0 0 1 0 38H55" fill="none" stroke="#E65BAE" stroke-width="20" stroke-linecap="round"/>
+      <circle cx="34" cy="26" r="10" fill="#5F4FC4"/>
+    </symbol>
+    <symbol id="pmStar" viewBox="0 0 24 24"><path d="M12 2.2l2.9 6.2 6.7.8-5 4.6 1.4 6.7L12 17.1l-6 3.4 1.4-6.7-5-4.6 6.7-.8z"/></symbol>
+    <symbol id="pmLaurel" viewBox="0 0 34 76">
+      <g fill="#D9D6DE">
+        <path d="M24 72c-3-1-6-4-6-8 4 0 7 3 6 8z"/><path d="M19 64c-4 0-8-2-9-6 4-1 8 1 9 6z"/><path d="M21 62c-1-4 0-8 4-10 2 4 0 8-4 10z"/>
+        <path d="M13 55c-4 1-8-1-10-5 4-2 8 0 10 5z"/><path d="M15 53c-2-4-1-8 2-11 3 4 2 8-2 11z"/>
+        <path d="M9 44c-4 1-7-1-9-5 4-2 7-1 9 5z"/><path d="M11 42c-2-4-2-8 1-11 3 3 3 8-1 11z"/>
+        <path d="M7 33c-3 1-6-2-7-6 4-1 7 1 7 6z"/><path d="M9 31c-2-4-1-8 2-11 3 4 2 8-2 11z"/>
+        <path d="M8 22c-3-1-5-4-4-8 4 1 5 4 4 8z"/><path d="M10 21c0-4 2-8 6-9 1 4-1 8-6 9z"/>
+        <path d="M13 12c-1-4 1-8 5-10 2 4 0 8-5 10z"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="nav">
+  <div class="nav-in">
+    <div class="nav-brand">
+      <span class="mk"><svg aria-label="Pregmate"><use href="#pmLogo"/></svg></span>
+      <b>Growth Audit</b><span class="co">· Pregmate</span>
+    </div>
+    <div class="nav-links">
+      <button class="on" data-view="over">Overview</button>
+      <button data-view="proto">Prototype</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= OVERVIEW ======================= -->
+<div class="view on" id="view-over">
+
+<div class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Growth Audit · November 2026</div>
+    <h1>Pregmate</h1>
+    <p class="lede">Five ideas to unlock more revenue from the traffic you already have.</p>
+    <div class="meta">Prepared by <b>Adapty</b> · based on your live iOS flow and your App Store listing</div>
+    <div class="herobtns"><button class="ghostbtn" data-demo><span class="pl"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>Watch the 30-second walkthrough</button></div>
+    <div class="stats">
+      <div class="stat"><b>30,000+</b><span>apps run subscriptions<br>on Adapty</span></div>
+      <div class="stat"><b>5</b><span>ideas, each rebuilt<br>as a working screen</span></div>
+      <div class="stat"><b>0</b><span>design changes<br>to your art direction</span></div>
+    </div>
+
+    <div class="fb">
+      <div class="fb-k">Built in Adapty Flow Builder</div>
+      <div class="fb-i">
+        <span class="tick"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+        <p><b>Millions of dollars</b> in subscription revenue pass through Flow Builder every month.</p>
+      </div>
+      <div class="fb-i">
+        <span class="tick"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+        <p><b>Nearly 500 apps</b> actively build their paywalls and onboarding in it — plenty of them past $100K MRR.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="wrap">
+    <div class="sec-k">What this is</div>
+    <h2>We opened Pregmate the way a new user does, then rebuilt the parts we think are leaving money on the table.</h2>
+    <p class="body">Adapty powers subscriptions for <b>30,000+ apps</b>, so we get to see what actually moves conversion and ARPU across the market rather than inside one app. We pointed that at Pregmate: went through the onboarding screen by screen, read your App Store listing, and looked for gaps between what you already have and what you currently show people.</p>
+    <p class="body">What follows is five ideas, not fifteen. Each one is a hypothesis you can A/B test, and each one is built into a clickable prototype so you can see it rather than imagine it. <b>The prototype uses your design, not ours.</b></p>
+
+    <div class="notes">
+      <div class="note">
+        <h4>We did not redesign your app</h4>
+        <p>Every screen in the prototype is yours: your magenta button, your grey answer cards, your wheel, your calendar, your paywall with the cell photo and the laurels. Only the order changed, plus a few things you already own but do not show at the right moment. This is not a design pitch.</p>
+      </div>
+      <div class="note">
+        <h4>You may have tested some of this</h4>
+        <p>We are working from the outside, so we cannot see your experiment history. If one of these is something you have already run, tell us and we will go deeper on the rest rather than repeat it.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="rule"></div>
+
+<div class="sec">
+  <div class="wrap">
+    <div class="sec-k">The five ideas</div>
+    <h2>Ranked by what we would test first.</h2>
+    <p class="body">Each one links straight to the screen in the prototype.</p>
+
+    <div class="ideas">
+      <button class="idea" data-jump="payoff">
+        <span class="no">01</span>
+        <span>
+          <h3>Show her dates before the price</h3>
+          <p>You ask for her last period, her cycle length and her period length. Then four loading bars say “Analyzing your cycle…” and the next screen is the paywall. She never sees what you worked out. Show her next period, fertile window and ovulation day first.</p>
+          <span class="seeit">See the screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+        <span class="out"><b>CR +10–20%</b><span>to purchase</span></span>
+      </button>
+
+      <button class="idea" data-jump="paywall">
+        <span class="no">02</span>
+        <span>
+          <h3>Name her goal on the paywall</h3>
+          <p>Early on she tells you if she wants to get pregnant, already is, or wants to understand her body. The paywall then says the same “Trusted by millions” line to all three. Open the text above the plans with her own date instead.</p>
+          <span class="seeit">See the screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+        <span class="out"><b>CR +15–20%</b><span>to purchase</span></span>
+      </button>
+
+      <button class="idea" data-jump="offer">
+        <span class="no">03</span>
+        <span>
+          <h3>Answer Skip with your free week</h3>
+          <p>You already sell a 7-day free trial on the $69.99 yearly plan. It sits behind a small toggle labelled “Not sure yet?”. Someone who taps Skip is exactly that person, and today she simply leaves. Show the trial as its own screen when she skips.</p>
+          <span class="seeit">See the screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+        <span class="out"><b>ARPU +10–15%</b><span>second chance</span></span>
+      </button>
+
+      <button class="idea" data-jump="remind">
+        <span class="no">04</span>
+        <span>
+          <h3>Ask for notifications after the paywall</h3>
+          <p>“Don’t miss your fertile days” and the iOS permission pop-up come right before the loader and the price. A system pop-up at that moment breaks the run-up to the paywall. Move the same screen one step later.</p>
+          <span class="seeit">See the screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+        <span class="out"><b>CR +10–15%</b><span>to purchase</span></span>
+      </button>
+
+      <button class="idea" data-jump="paywall">
+        <span class="no">05</span>
+        <span>
+          <h3>Put your 4.9 rating next to the price</h3>
+          <p>Your App Store rating is 4.9 from 13K ratings. The flow shows five stars and “Trusted by millions”, but never the number itself. Add it to the paywall, inside the laurels you already use.</p>
+          <span class="seeit">See the screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+        <span class="out"><b>CR +10–15%</b><span>to purchase</span></span>
+      </button>
+    </div>
+
+    <div class="band">
+      <div class="txt">
+        <div class="lab">Potential result</div>
+        <p>Run together, these five work on the same two minutes: what she sees just before the price, what the price screen says to her, and what happens when she says no.</p>
+      </div>
+      <div class="nums">
+        <div><b>+25%</b><span>CR to purchase</span></div>
+        <div><b>up to +30%</b><span>revenue</span></div>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <div class="qr"><img src="img/qr.svg" alt="QR code for the prototype"><span><b>Or open it on your phone</b>Scan to try the flow in your hand.</span></div>
+      <button class="bigbtn" data-view="proto">Open the prototype
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  <div class="wrap">
+    Impact ranges are Adapty's expected effect from teardowns and A/B tests across subscription apps — not measured lift for Pregmate. Every price, rating, trial term and line of copy here and in the prototype comes from Pregmate's own App Store listing and in-app screens. Dates in the prototype are counted from the sample answers with the standard calendar method and are estimates.
+  </div>
+</div>
+</div><!-- /view-over -->
+
+<!-- ======================= PROTOTYPE ======================= -->
+<div class="view" id="view-proto">
+<div class="stage">
+  <div class="phonecol">
+    <div class="tools" id="tools">
+      <div class="seg" id="segTheme"><button data-theme="light" class="on">Light</button><button data-theme="dark">Dark</button></div>
+      <button class="demo-btn" id="demoBtn"><svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M7 4.5v15l12-7.5z"/></svg>30-sec walkthrough</button>
+    </div>
+    <div class="phone">
+      <div class="phone-in" id="phoneIn">
+        <div class="island"></div>
+        <div class="sbar" id="sbar">
+          <span>9:41</span>
+          <span class="glyphs">
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7.5" width="3" height="3.5" rx="1"/><rect x="4.5" y="5.5" width="3" height="5.5" rx="1"/><rect x="9" y="3" width="3" height="8" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+            <svg width="16" height="11" viewBox="0 0 16 11" fill="currentColor"><path d="M8 10.5 5.6 7.9a3.4 3.4 0 0 1 4.8 0L8 10.5Zm0-5.6a6.4 6.4 0 0 0-4.5 1.9L1.7 4.9a9 9 0 0 1 12.6 0l-1.8 1.9A6.4 6.4 0 0 0 8 4.9Z"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".6" y=".6" width="20" height="10.8" rx="3" stroke="currentColor" stroke-opacity=".5"/><rect x="2.2" y="2.2" width="16.5" height="7.6" rx="1.8" fill="currentColor"/><path d="M22.3 4.1v3.8a2 2 0 0 0 0-3.8Z" fill="currentColor" fill-opacity=".5"/></svg>
+          </span>
+        </div>
+        <div class="homebar" id="homebar"></div>
+        <div class="finger" id="finger"></div>
+        <div class="screenwrap">
+
+<!-- WELCOME -->
+<section class="scr scr--wash" data-id="welcome">
+  <div class="scr-top"></div>
+  <div class="scr-body dock">
+    <img class="pm-wimg" src="img/welcome.png" alt="Period, Ovulation, Pregnancy">
+    <p class="pm-kick">Welcome, <span data-name></span>!</p>
+    <h2 class="pm-wh">Track it all,<br>in one place</h2>
+  </div>
+  <div class="scr-foot"><button class="pm-btn" data-go="goal">Continue</button></div>
+</section>
+
+<!-- GOAL -->
+<section class="scr" data-id="goal">
+  <div class="scr-top">
+    <div class="pm-nav"><button class="pm-back" data-back aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button></div>
+    <h2 class="pm-h"><span data-name></span>, are you<br>pregnant?</h2>
+  </div>
+  <div class="scr-body">
+    <div class="pm-opts" id="goalList">
+      <button class="pm-opt" data-v="ttc">No, but I want to be</button>
+      <button class="pm-opt" data-v="body">No, I’m here to better<br>understand my body</button>
+      <button class="pm-opt" data-v="preg">Yes, I am</button>
+    </div>
+  </div>
+  <div class="scr-foot"><button class="pm-btn" data-go="lastp">Next</button></div>
+</section>
+
+<!-- LAST PERIOD -->
+<section class="scr" data-id="lastp">
+  <div class="scr-top">
+    <div class="pm-nav"><button class="pm-back" data-back aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><button class="pm-skip" data-go="cycle">Skip</button></div>
+    <h2 class="pm-h" style="margin-top:4px">Last Period</h2>
+    <p class="pm-sub">Choose your last period dates</p>
+    <div class="pm-wk"><span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span></div>
+  </div>
+  <div class="scr-body" id="calBody"></div>
+  <div class="scr-foot"><button class="pm-btn" data-go="cycle">Next</button></div>
+</section>
+
+<!-- CYCLE LENGTH -->
+<section class="scr" data-id="cycle">
+  <div class="scr-top">
+    <div class="pm-nav"><button class="pm-back" data-back aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><button class="pm-skip" data-go="loader">Skip</button></div>
+    <h2 class="pm-h" style="margin-top:12px">Average cycle length</h2>
+    <p class="pm-sub">Enter days quantity of your average cycle</p>
+  </div>
+  <div class="scr-body dock">
+    <div class="pm-wheelwrap">
+      <div class="pm-wheelbar"><span>days</span></div>
+      <div class="pm-wheel" id="wheel"></div>
+    </div>
+  </div>
+  <div class="scr-foot"><button class="pm-btn" data-go="loader">Next</button></div>
+</section>
+
+<!-- LOADER -->
+<section class="scr" data-id="loader">
+  <div class="scr-top"><h2 class="pm-load-h">We’re setting up<br>Pregmate for you…</h2></div>
+  <div class="scr-body" id="loadRows">
+    <div class="pm-lrow"><span></span><div class="pm-ltrack"><i></i><b><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></b></div></div>
+    <div class="pm-lrow"><span></span><div class="pm-ltrack"><i></i><b><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></b></div></div>
+    <div class="pm-lrow"><span></span><div class="pm-ltrack"><i></i><b><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></b></div></div>
+    <div class="pm-lrow"><span></span><div class="pm-ltrack"><i></i><b><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></b></div></div>
+  </div>
+  <div class="scr-foot"><button class="pm-btn" id="loadBtn" data-go="payoff">Continue</button></div>
+</section>
+
+<!-- PAYOFF -->
+<section class="scr scr--wash" data-id="payoff">
+  <div class="scr-top">
+    <div class="pm-nav"><button class="pm-back" id="payoffBack" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button></div>
+    <p class="pm-kick" style="margin-top:2px">Here’s your cycle, <span data-name></span></p>
+    <h2 class="pm-h" style="margin-top:6px;font-size:26px" id="poH"></h2>
+  </div>
+  <div class="scr-body">
+    <div class="pm-calcard" id="poCal"><div class="pm-mini" id="poMini"></div></div>
+    <div class="pm-week hidden" id="poWeek"><b id="poWeekN"></b><span>of your pregnancy, counted from your last period</span></div>
+    <div class="pm-rows" id="poRows"></div>
+    <p class="pm-est" id="poEst"></p>
+  </div>
+  <div class="scr-foot"><button class="pm-btn" data-go="paywall">Continue</button></div>
+</section>
+
+<!-- PAYWALL -->
+<section class="scr scr--pay" data-id="paywall" data-light="1">
+  <div class="pm-hero"><img src="img/hero.png" alt=""></div>
+  <button class="pm-pskip" id="paySkip">Skip</button>
+  <div class="scr-top"><div class="pm-tile"><svg><use href="#pmLogo"/></svg></div></div>
+  <div class="scr-body">
+    <div class="pm-laurel">
+      <svg class="lv"><use href="#pmLaurel"/></svg>
+      <div>
+        <div class="pm-stars"><svg><use href="#pmStar"/></svg><svg><use href="#pmStar"/></svg><svg><use href="#pmStar"/></svg><svg><use href="#pmStar"/></svg><svg><use href="#pmStar"/></svg></div>
+        <h3>Trusted by millions</h3>
+        <p>to better understand their<br>cycles and health</p>
+      </div>
+      <svg class="lv" style="transform:scaleX(-1)"><use href="#pmLaurel"/></svg>
+    </div>
+    <p class="pm-rate"><b>4.9</b> from <b>13K ratings</b> on the App Store</p>
+    <p class="pm-ppara" id="payPara"></p>
+    <button class="pm-tog" id="payTog"><span><b id="togT"></b><span class="s" id="togS"></span></span><span class="pm-sw"></span></button>
+    <div class="pm-plans" id="planList">
+      <button class="pm-plan" data-v="year"><span class="pm-badge">Save 71%</span><span><span class="t">Yearly Plan</span><span class="s">12 mo • $69.99</span></span><span class="r">$5.83 / mo</span></button>
+      <button class="pm-plan one" data-v="month"><span><span class="t">Monthly</span></span><span class="r">$19.99 / mo</span></button>
+    </div>
+    <div style="height:4px"></div>
+  </div>
+  <div class="scr-foot"><button class="pm-btn grad" id="payCta">Join now</button></div>
+</section>
+
+<!-- OFFER ON SKIP -->
+<section class="scr scr--offer sheet" data-id="offer">
+  <div class="scr-top">
+    <div class="pm-nav"><span></span><button class="pm-skip" id="offClose">Skip</button></div>
+    <div class="pm-tile"><svg><use href="#pmLogo"/></svg></div>
+    <p class="pm-kick" style="margin-top:16px">Not sure yet, <span data-name></span>?</p>
+    <h2 class="pm-h" style="margin-top:6px">Try Pregmate free<br>for 7 days</h2>
+    <div style="text-align:center"><span class="pm-chip" id="offChip"></span></div>
+  </div>
+  <div class="scr-body">
+    <div class="pm-tl">
+      <div class="pm-tli now"><span class="ic"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>Today</b><span>Your free week starts. No payment now.</span></div></div>
+      <div class="pm-tli"><span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></span><div><b id="offDay"></b><span>$69.99 per year starts, unless you cancel before.</span></div></div>
+    </div>
+  </div>
+  <div class="scr-foot">
+    <p class="pm-oplan">7 days free, then $69.99 per year ($5.83 / mo)</p>
+    <button class="pm-btn grad" id="offCta">Start free trial</button>
+    <p class="pm-helper">No payment now, cancel anytime</p>
+  </div>
+</section>
+
+<!-- REMINDERS -->
+<section class="scr" data-id="remind">
+  <div class="scr-top"><div class="pm-nav"><span></span><button class="pm-skip" data-go="welcome">Later</button></div></div>
+  <div class="scr-body dock">
+    <div class="pm-rphone"></div>
+    <div class="pm-rnote"><span class="ti"><svg><use href="#pmLogo"/></svg></span><p><b>🎯 Your ovulation is in 2 days</b><br>— it’s your most fertile window!<br>We’ll remind you when it’s time to test</p></div>
+    <h2 class="pm-rh">Don’t miss<br>your fertile days</h2>
+    <p class="pm-rsub">Reminders help you log right on time, so ovulation predictions stay accurate.</p>
+  </div>
+  <div class="scr-foot"><button class="pm-btn" id="remBtn">Turn on reminders</button></div>
+  <div class="pm-alert" id="remAlert"><div class="bx"><h4>“Pregmate” Would Like to Send You Notifications</h4><p>Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.</p><div class="bt"><button data-alert>Don’t Allow</button><button data-alert>Allow</button></div></div></div>
+</section>
+
+        </div>
+      </div>
+    </div>
+    <div class="demo-cap hidden" id="demoCap"><div class="bar"><i id="demoProg"></i></div><p id="demoTxt"></p><button id="demoStop">Stop</button></div>
+    <div class="chips" id="chips"></div>
+    <p class="chiphint">Jump to any screen — answers already filled in.</p>
+    <div class="qr"><img src="img/qr.svg" alt="QR code for this prototype"><span><b>Open it on your phone</b>Scan to try the flow in your hand.</span></div>
+  </div>
+  <div class="panelcol"><div class="pn" id="panel"></div></div>
+</div>
+</div><!-- /view-proto -->
+
+<script>
+/* ================= state ================= */
+var DAY=86400000;
+function mid(d){ return new Date(d.getFullYear(),d.getMonth(),d.getDate()); }
+function addD(d,n){ return new Date(d.getFullYear(),d.getMonth(),d.getDate()+n); }
+function diffD(a,b){ return Math.round((mid(a)-mid(b))/DAY); }
+var TODAY=mid(new Date());
+var S0={theme:'light'};
+function defaults(){ return { theme:S0.theme, name:'Julia', goal:'body', start:addD(TODAY,-6), plen:4, cycle:27, trial:false, plan:'year' }; }
+var S=defaults();
+function fmt(d,y){ var o={month:'short',day:'numeric'}; if(y) o.year='numeric'; return d.toLocaleDateString('en-US',o); }
+function key(d){ return d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate(); }
+
+/* the same arithmetic a calendar-method tracker does: next period = last + cycle, ovulation = 14 days before it */
+function calc(){
+  var next=addD(S.start,S.cycle); while(next<TODAY) next=addD(next,S.cycle);
+  var ov=addD(S.start,S.cycle-14); while(ov<TODAY) ov=addD(ov,S.cycle);
+  var f0=addD(ov,-5);
+  var due=addD(S.start,280), week=Math.floor(diffD(TODAY,S.start)/7)+1;
+  return {next:next, ov:ov, f0:f0, open:f0<=TODAY, due:due, week:week};
+}
+function lead(c){
+  if(S.goal==='preg') return 'our due date is around <em>'+fmt(c.due,true)+'</em>';
+  if(S.goal==='ttc') return c.open ? 'our fertile window is open until <em>'+fmt(c.ov)+'</em>' : 'our fertile window opens <em>'+fmt(c.f0)+'</em>';
+  return 'our next period is due <em>'+fmt(c.next)+'</em>';
+}
+
+/* ================= builders ================= */
+var calBody=document.getElementById('calBody');
+function buildCal(){
+  var h='', months=[-1,0,1];
+  months.forEach(function(m){
+    var first=new Date(TODAY.getFullYear(),TODAY.getMonth()+m,1), n=new Date(first.getFullYear(),first.getMonth()+1,0).getDate();
+    h+='<div class="pm-mon" data-m="'+m+'">'+first.toLocaleDateString('en-US',{month:'long',year:'numeric'})+'</div><div class="pm-days">';
+    for(var i=0;i<first.getDay();i++) h+='<span></span>';
+    for(var d=1;d<=n;d++){ var dt=new Date(first.getFullYear(),first.getMonth(),d), off=diffD(dt,S.start);
+      var cls='pm-day'+(dt>TODAY?' dis':'')+(off>=0&&off<S.plen&&dt<=TODAY?' on':'')+(+dt===+TODAY?' today':'');
+      h+='<button class="'+cls+'" data-k="'+key(dt)+'" data-t="'+(+dt)+'"><i>'+d+'</i></button>'; }
+    h+='</div>';
+  });
+  calBody.innerHTML=h+'<div style="height:24px"></div>';
+  calBody.querySelectorAll('.pm-day').forEach(function(b){ b.addEventListener('click',function(){
+    if(b.classList.contains('dis')) return; var st=calBody.scrollTop; S.start=new Date(+b.dataset.t); syncScreen(); calBody.scrollTop=st; }); });
+}
+function scrollCal(){ var m=(S.start.getMonth()===TODAY.getMonth())?0:-1, el=calBody.querySelector('[data-m="'+m+'"]'); if(el) calBody.scrollTop=Math.max(0,el.offsetTop-22); }
+
+var IH=44, WMIN=21, WMAX=45, wheel=document.getElementById('wheel'), wTimer=null;
+(function(){ var h='<div class="pm-sp"></div>'; for(var v=WMIN; v<=WMAX; v++) h+='<div class="pm-it">'+v+'</div>'; wheel.innerHTML=h+'<div class="pm-sp"></div>'; })();
+function paintWheel(){ var idx=Math.round(wheel.scrollTop/IH); wheel.querySelectorAll('.pm-it').forEach(function(it,i){ var d=Math.abs(i-idx);
+  it.style.opacity=d===0?1:(d===1?.55:.32); it.style.transform='scale('+(d===0?1:(d===1?.86:.7))+')'; }); return idx; }
+function setWheel(){ wheel.scrollTop=(S.cycle-WMIN)*IH; paintWheel(); }
+wheel.addEventListener('scroll',function(){ var idx=paintWheel(); clearTimeout(wTimer);
+  wTimer=setTimeout(function(){ var v=Math.min(WMAX,WMIN+idx); if(v!==S.cycle){ S.cycle=v; syncScreen(true); } },120); });
+
+/* ================= everything downstream reads S ================= */
+function syncScreen(fromWheel){
+  var c=calc();
+  document.querySelectorAll('[data-name]').forEach(function(el){ el.textContent=S.name; });
+  document.querySelectorAll('#goalList .pm-opt').forEach(function(b){ b.classList.toggle('on', b.dataset.v===S.goal); });
+  buildCal();
+  if(!fromWheel) setWheel();
+
+  /* loader lines name her answers */
+  var ls=document.querySelectorAll('#loadRows .pm-lrow span');
+  ls[0].textContent='Reviewing your answers…';
+  ls[1].textContent='Counting from your last period on '+fmt(S.start)+'…';
+  ls[2].textContent='Mapping your '+S.cycle+'-day cycle…';
+  ls[3].textContent= S.goal==='preg' ? 'Working out your due date…' : (S.goal==='ttc' ? 'Finding your fertile window…' : 'Predicting your next period…');
+
+  /* payoff */
+  var preg=S.goal==='preg';
+  document.getElementById('poH').innerHTML='Y'+lead(c);
+  document.getElementById('poCal').classList.toggle('hidden',preg);
+  document.getElementById('poWeek').classList.toggle('hidden',!preg);
+  document.getElementById('poWeekN').textContent='Week '+c.week;
+  var rows;
+  if(preg) rows=[['vio','Due date',fmt(c.due,true)],['','Last period',fmt(S.start)]];
+  else { rows=[['','Next period',fmt(c.next)],['teal','Fertile window',fmt(c.f0)+' – '+fmt(c.ov)],['dot','Ovulation day',fmt(c.ov)]];
+    if(S.goal==='ttc') rows=[rows[1],rows[2],rows[0]]; }
+  document.getElementById('poRows').innerHTML=rows.map(function(r){ return '<div class="pm-row"><span class="d '+r[0]+'"></span>'+r[1]+'<b>'+r[2]+'</b></div>'; }).join('');
+  document.getElementById('poEst').textContent= preg ? 'Estimated from your last period. Your provider may adjust it.' :
+    'Estimated from your last period and your '+S.cycle+'-day cycle. It gets more accurate as you log tests.';
+  if(!preg){
+    var g0=addD(S.start,-S.start.getDay()), last=addD(c.next,S.plen-1); if(c.ov>last) last=c.ov;
+    var rowsN=Math.min(9,Math.ceil((diffD(last,g0)+1)/7)), h='';
+    for(var i=0;i<rowsN*7;i++){ var dt=addD(g0,i), o=diffD(dt,S.start), on=diffD(dt,c.next), cl='';
+      if(o>=0&&o<S.plen) cl='p'; else if(on>=0&&on<S.plen) cl='n'; else if(+dt===+c.ov) cl='o'; else if(dt>=c.f0&&dt<c.ov) cl='f'; else if(o<0) cl='x';
+      if(+dt===+TODAY) cl+=' t';
+      h+='<span class="'+cl+'"><i>'+dt.getDate()+'</i></span>'; }
+    document.getElementById('poMini').innerHTML=h;
+  }
+
+  /* paywall */
+  document.getElementById('payPara').innerHTML='<b>'+S.name+', y'+lead(c)+'.</b> Expert cycle tracking and precise fertility insights — tailored just for you.';
+  document.getElementById('payTog').classList.toggle('on',S.trial);
+  document.getElementById('togT').textContent=S.trial?'Free trial for 7 days':'Not sure yet?';
+  document.getElementById('togS').textContent=S.trial?'No payment now, cancel anytime':'Enable free trial';
+  document.querySelectorAll('#planList .pm-plan').forEach(function(b){ b.classList.toggle('on', b.dataset.v===S.plan); });
+
+  /* offer */
+  var chip=document.getElementById('offChip');
+  chip.classList.toggle('vio',preg);
+  chip.textContent= preg ? 'Your due date: '+fmt(c.due,true) : (S.goal==='ttc' ? 'Your fertile window: '+fmt(c.f0)+' – '+fmt(c.ov) : 'Your next period: '+fmt(c.next));
+  document.getElementById('offDay').textContent=fmt(addD(TODAY,7))+' · day 7';
+}
+
+/* ================= router ================= */
+var ORDER=['welcome','goal','lastp','cycle','loader','payoff','paywall','offer','remind'];
+var LABEL={welcome:'Welcome',goal:'Goal',lastp:'Last period',cycle:'Cycle length',loader:'Loader',payoff:'Your dates',paywall:'Paywall',offer:'Offer on skip',remind:'Reminders'};
+var scr={}, hist=[], cur='welcome', loadTimers=[];
+document.querySelectorAll('.scr').forEach(function(s){ scr[s.dataset.id]=s; });
+
+function chrome(){ var dark=S.theme==='dark', l=dark || !!scr[cur].dataset.light;
+  document.getElementById('sbar').classList.toggle('light',l); document.getElementById('homebar').classList.toggle('light',dark); }
+function enter(id){ chrome(); paintChips(); paintPanel(); clearLoad(); document.getElementById('remAlert').classList.remove('on');
+  if(id==='loader') runLoader(); if(id==='cycle') requestAnimationFrame(setWheel); if(id==='lastp') requestAnimationFrame(scrollCal); }
+function go(id,opts){
+  opts=opts||{}; if(id===cur) return;
+  var from=scr[cur], to=scr[id];
+  if(id==='welcome'){ jump('welcome'); return; }
+  if(!opts.back) hist.push(cur);
+  if(from){ from.classList.remove('is-active');
+    if(!to.classList.contains('sheet') && !from.classList.contains('sheet')) from.classList.add('is-past'); }
+  Object.keys(scr).forEach(function(k){ if(k!==id&&k!==cur) scr[k].classList.remove('is-active'); });
+  if(to.classList.contains('sheet')) from.classList.add('is-active');
+  to.classList.remove('is-past'); to.classList.add('is-active');
+  cur=id; enter(id);
+}
+function back(){
+  if(!hist.length) return;
+  var prev=hist.pop(); if(prev==='loader') prev=hist.pop()||'cycle';
+  scr[cur].classList.remove('is-active');
+  scr[prev].classList.remove('is-past'); scr[prev].classList.add('is-active');
+  cur=prev; enter(prev);
+}
+function jump(id){
+  var i=ORDER.indexOf(id);
+  Object.keys(scr).forEach(function(k){ scr[k].classList.add('nofx'); scr[k].classList.remove('is-active','is-past'); });
+  hist=ORDER.slice(0,i<0?0:i);
+  if(id==='offer') scr.paywall.classList.add('is-active');
+  scr[id].classList.add('is-active'); cur=id;
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){
+    Object.keys(scr).forEach(function(k){ scr[k].classList.remove('nofx'); }); }); });
+  syncScreen(); enter(id);
+}
+function paintChips(){
+  var c=document.getElementById('chips');
+  if(!c.children.length){ ORDER.forEach(function(id){
+      var b=document.createElement('button'); b.className='chip'+(id==='offer'?' offer':''); b.textContent=LABEL[id];
+      b.dataset.id=id; b.onclick=function(){ stopDemo(); jump(id); }; c.appendChild(b); }); }
+  c.querySelectorAll('.chip').forEach(function(b){ b.classList.toggle('on', b.dataset.id===cur); });
+}
+
+function clearLoad(){ loadTimers.forEach(clearTimeout); loadTimers=[]; }
+function runLoader(){
+  var k=demo.on?0.48:1, step=850*k, rows=[].slice.call(document.querySelectorAll('#loadRows .pm-lrow')), btn=document.getElementById('loadBtn');
+  btn.disabled=true;
+  rows.forEach(function(r){ r.classList.remove('done'); var f=r.querySelector('i'); f.style.transition='none'; f.style.width='0'; });
+  rows.forEach(function(r,i){
+    loadTimers.push(setTimeout(function(){ var f=r.querySelector('i'); f.style.transition='width '+(step-80)+'ms ease-out'; f.style.width='100%'; },60+i*step));
+    loadTimers.push(setTimeout(function(){ r.classList.add('done'); },60+(i+1)*step-60));
+  });
+  loadTimers.push(setTimeout(function(){ btn.disabled=false; },60+rows.length*step));
+}
+
+/* ================= wiring ================= */
+document.querySelectorAll('[data-go]').forEach(function(b){ b.addEventListener('click',function(){ if(!b.disabled) go(b.dataset.go); }); });
+document.querySelectorAll('[data-back]').forEach(function(b){ b.addEventListener('click',back); });
+document.getElementById('payoffBack').addEventListener('click',back);
+document.querySelectorAll('#goalList .pm-opt').forEach(function(b){ b.addEventListener('click',function(){ S.goal=b.dataset.v; syncScreen(); }); });
+document.querySelectorAll('#planList .pm-plan').forEach(function(b){ b.addEventListener('click',function(){ S.plan=b.dataset.v; if(S.plan==='month') S.trial=false; syncScreen(); }); });
+document.getElementById('payTog').addEventListener('click',function(){ S.trial=!S.trial; if(S.trial) S.plan='year'; syncScreen(); });
+document.getElementById('paySkip').addEventListener('click',function(){ go('offer'); });
+document.getElementById('payCta').addEventListener('click',function(){ go('remind'); });
+document.getElementById('offClose').addEventListener('click',function(){ go('remind'); });
+document.getElementById('offCta').addEventListener('click',function(){ go('remind'); });
+document.getElementById('remBtn').addEventListener('click',function(){ document.getElementById('remAlert').classList.add('on'); });
+document.querySelectorAll('[data-alert]').forEach(function(b){ b.addEventListener('click',function(){ document.getElementById('remAlert').classList.remove('on'); setTimeout(function(){ if(cur==='remind') jump('welcome'); },350); }); });
+
+function setSeg(id,attr,val){ document.querySelectorAll('#'+id+' button').forEach(function(b){ b.classList.toggle('on', b.dataset[attr]===val); }); }
+function setTheme(th){ S.theme=th; S0.theme=th; document.getElementById('phoneIn').classList.toggle('dark',th==='dark'); setSeg('segTheme','theme',th); chrome(); }
+document.querySelectorAll('#segTheme button').forEach(function(b){ b.addEventListener('click',function(){ setTheme(b.dataset.theme); }); });
+
+/* ================= the 30-second walkthrough ================= */
+var demo={tok:0,on:false,t0:0,iv:null}, finger=document.getElementById('finger'), phoneIn=document.getElementById('phoneIn');
+function W(ms){ return new Promise(function(r){ setTimeout(r,ms); }); }
+function cap(txt){ document.getElementById('demoTxt').textContent=txt; }
+async function tap(sel,tok){
+  if(demo.tok!==tok) throw 0;
+  var el=document.querySelector(sel); if(!el) return;
+  var r=el.getBoundingClientRect(), p=phoneIn.getBoundingClientRect(), z=p.width/phoneIn.offsetWidth||1;
+  finger.style.left=((r.left-p.left+r.width/2)/z)+'px'; finger.style.top=((r.top-p.top+r.height/2)/z)+'px';
+  finger.classList.add('show'); await W(380); if(demo.tok!==tok) throw 0;
+  finger.classList.add('press'); await W(120); finger.classList.remove('press'); el.click(); await W(160);
+  if(demo.tok!==tok) throw 0;
+}
+async function pause(ms,tok){ await W(ms); if(demo.tok!==tok) throw 0; }
+function startDemo(){
+  stopDemo(); var tok=++demo.tok; demo.on=true; demo.t0=Date.now();
+  S=defaults(); jump('welcome');
+  document.getElementById('demoCap').classList.remove('hidden');
+  demo.iv=setInterval(function(){ document.getElementById('demoProg').style.width=Math.min(100,(Date.now()-demo.t0)/260)+'%'; },200);
+  (async function(){
+    try{
+      cap('Your welcome screen, unchanged.'); await pause(1300,tok);
+      await tap('[data-id=welcome] .pm-btn',tok);
+      cap('Your goal question. She wants to get pregnant.'); await pause(600,tok);
+      await tap('#goalList [data-v=ttc]',tok); await pause(350,tok); await tap('[data-id=goal] .pm-btn',tok);
+      cap('Your calendar. She moves her last period.'); await pause(700,tok);
+      var alt=addD(S.start,-2); if(alt.getMonth()!==S.start.getMonth()) alt=addD(S.start,1);
+      await tap('#calBody [data-k="'+key(alt)+'"]',tok); await pause(350,tok); await tap('[data-id=lastp] .pm-btn',tok);
+      cap('Your wheel. Her cycle is 28 days.'); await pause(500,tok);
+      wheel.scrollTo({top:(28-WMIN)*IH,behavior:'smooth'}); await pause(800,tok);
+      S.cycle=28; setWheel(); syncScreen(true);
+      await tap('[data-id=cycle] .pm-btn',tok);
+      cap('The loading bars now name her own answers.'); await pause(1900,tok);
+      await tap('#loadBtn',tok);
+      cap('New: her fertile window, before any price.'); await pause(2300,tok);
+      await tap('[data-id=payoff] .pm-btn',tok);
+      cap('The paywall opens with her date and your 4.9 rating.'); await pause(1900,tok);
+      await tap('#planList [data-v=month]',tok); await pause(500,tok); await tap('#planList [data-v=year]',tok); await pause(400,tok);
+      cap('She taps Skip. Your own 7-day trial answers.'); await tap('#paySkip',tok); await pause(2400,tok);
+      cap('That is the flow. Notifications are asked after this, not before the price.');
+      finger.classList.remove('show'); await pause(2400,tok); stopDemo();
+    }catch(e){}
+  })();
+}
+function stopDemo(){ if(!demo.on) return; demo.tok++; demo.on=false; clearInterval(demo.iv); finger.classList.remove('show','press');
+  document.getElementById('demoCap').classList.add('hidden'); }
+document.getElementById('demoBtn').addEventListener('click',startDemo);
+document.getElementById('demoStop').addEventListener('click',stopDemo);
+phoneIn.addEventListener('pointerdown',function(e){ if(e.isTrusted && demo.on) stopDemo(); });
+</script>
+<script>
+/* ---- the short panel: hypothesis + potential outcome, nothing else ---- */
+var PANEL = {
+welcome:{ctx:true,t:'Track it all, in one place',
+ kept:'Untouched: your three circles, “Welcome, Julia!” in violet, the headline and Continue. Julia is a sample name; your flow asks for it earlier.'},
+goal:{ctx:true,t:'Julia, are you pregnant?',
+ kept:'Untouched: your three grey answer cards, magenta when picked. Her answer is now used on the loader, the dates screen, the paywall and the offer.'},
+lastp:{ctx:true,t:'Last Period',
+ kept:'Untouched: your scrolling calendar with magenta day circles, the Today marker and Skip. Tap another day and the screens after it change.'},
+cycle:{ctx:true,t:'Average cycle length',
+ kept:'Untouched: your wheel with the grey bar and the “days” label. It is a working control. Scroll it and the dates downstream move.'},
+loader:{n:1,t:'Show her dates before the price',
+ hyp:'Try naming her own answers on your four loading bars, <b>because “Analyzing your cycle…” reads the same for everyone and the next screen today is the price</b>. Change the last period or the cycle length and these lines change.',
+ kept:'Your title, the four orange-to-pink bars with their ticks and the Continue button.',
+ out:'CR +10–20%'},
+payoff:{n:1,t:'Show her dates before the price',
+ hyp:'Try showing her next period, fertile window and ovulation day right after the loader, <b>because she gave you three cycle answers and today gets nothing back before the paywall</b>. The dates are counted from her own last period and cycle length.',
+ kept:'Built only from your own parts: the pink info-screen background, the calendar card from “Get insights into your fertility”, magenta period circles, teal fertile days and the violet highlight.',
+ out:'CR +10–20%'},
+paywall:{n:2,t:'Name her goal on the paywall',
+ hyp:'Try opening the paragraph with her own date, <b>because today the paywall says the same thing to someone trying to conceive, someone pregnant and someone tracking her period</b>. Go back to “Goal” and change the answer; this line follows.',
+ hyp2:'Try adding “4.9 from 13K ratings” and your five stars inside the laurels, <b>because the flow says “Trusted by millions” but never shows your real App Store number</b>.',
+ n2:5, t2:'Put your 4.9 rating next to the price', out2:'CR +10–15%',
+ kept:'The cell photo and its curve, your icon tile, the laurels, the “Not sure yet?” trial toggle, the Yearly card with Save 71%, Monthly, and the orange-to-pink Join now. Prices are as published.',
+ out:'CR +15–20%'},
+offer:{n:3,t:'Answer Skip with your free week',
+ hyp:'Try showing your 7-day trial as its own screen when she taps Skip, <b>because the trial already exists but sits behind a small toggle, and a skip today ends the sale</b>. It is the same $69.99 yearly plan. No new price, no countdown.',
+ kept:'Your icon tile, the violet highlight, the pink background, the gradient button and your own lines “Not sure yet?” and “No payment now, cancel anytime”.',
+ out:'ARPU +10–15%'},
+remind:{n:4,t:'Ask for notifications after the paywall',
+ hyp:'Try asking for notifications here, <b>because today this screen and the iOS pop-up sit right before the loader and the price, and interrupt the build-up</b>. The screen itself is unchanged.',
+ kept:'The phone illustration, the sample notification, the headline, Later and Turn on reminders.',
+ out:'CR +10–15%'}
+};
+function outBlock(val){ return '<div class="pn-out"><div class="lab">Potential outcome · based on Adapty data</div><div class="v">'+val+'</div></div>'; }
+function paintPanel(){
+  var d=PANEL[cur]; if(!d) return;
+  var h='';
+  if(d.ctx){
+    h += '<div class="pn-n ctx">Context · no change proposed</div><h3 class="pn-t">'+d.t+'</h3><div class="pn-kept">'+d.kept+'</div>';
+  } else {
+    h += '<div class="pn-n">Idea '+d.n+' of 5</div><h3 class="pn-t">'+d.t+'</h3><p class="pn-hyp">'+d.hyp+'</p>'+outBlock(d.out);
+    if(d.hyp2) h += '<div class="pn-sep"></div><div class="pn-n">Idea '+d.n2+' of 5</div><h3 class="pn-t">'+d.t2+'</h3><p class="pn-hyp">'+d.hyp2+'</p>'+outBlock(d.out2);
+    h += '<div class="pn-kept"><b>Your design, unchanged.</b> '+d.kept+'</div>';
+  }
+  h += '<div class="pn-foot">Ranges are Adapty’s expected effect from tests across 30,000+ subscription apps — not measured lift for Pregmate. '
+     + 'Prices, the rating, trial terms and copy come from your own published material. Dates are estimates from the sample answers.</div>';
+  document.getElementById('panel').innerHTML = h;
+}
+
+/* ---- views, jumps from the overview ---- */
+function showView(v){
+  if(v!=='proto') stopDemo();
+  document.querySelectorAll('.view').forEach(function(x){ x.classList.remove('on'); });
+  document.getElementById('view-'+v).classList.add('on');
+  document.querySelectorAll('.nav-links button[data-view]').forEach(function(b){ b.classList.toggle('on', b.dataset.view===v); });
+  window.scrollTo(0,0);
+  if(v==='proto'){ if(cur==='cycle') requestAnimationFrame(setWheel); if(cur==='lastp') requestAnimationFrame(scrollCal); }
+}
+document.querySelectorAll('[data-view]').forEach(function(b){ b.addEventListener('click',function(){ showView(b.dataset.view); }); });
+document.querySelectorAll('.idea[data-jump]').forEach(function(b){
+  b.addEventListener('click',function(){ showView('proto'); jump(b.dataset.jump); });
+});
+document.querySelectorAll('[data-demo]').forEach(function(b){ b.addEventListener('click',function(){ showView('proto'); startDemo(); }); });
+
+scr.welcome.classList.add('is-active');
+syncScreen(); chrome(); paintChips(); paintPanel();
+if(/[?&]open=proto/.test(location.search)) showView('proto');
+</script>
+</body>
+</html>
